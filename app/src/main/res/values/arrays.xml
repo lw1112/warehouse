@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="shelf">
+        <item>货架1</item>
+        <item>货架2</item>
+        <item>货架3</item>
+        <item>货架4</item>
+        <item>货架5</item>
+    </string-array>
+    <string-array name="good">
+        <item>货物1</item>
+        <item>货物2</item>
+        <item>货物3</item>
+        <item>货物4</item>
+        <item>货物5</item>
+        <item>货物7</item>
+        <item>货物8</item>
+        <item>货物9</item>
+        <item>货物10</item>
+    </string-array>
+</resources>

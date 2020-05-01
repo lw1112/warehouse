@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">warehouse</string>
+    <string name="text1">Functions</string>
+    <string name="purchase_top">进货安排</string>
+    <string name="left">余</string>
+    <string name="out">出</string>
+    <string name="in">进</string>
+    <string name="ok">OK</string>
+    <string name="ename"></string>
+</resources>
