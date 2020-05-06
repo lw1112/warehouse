@@ -15,8 +15,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -227,7 +232,6 @@ public class QueryActivity extends AppCompatActivity {
 
 class loginservlet extends Thread {
     String ename = null;
-    String mima = null;
     Socket socket;
     BufferedReader br = null;
     PrintWriter pw = null;
@@ -235,24 +239,38 @@ class loginservlet extends Thread {
 
     public void run() {
         try {
-            socket = new Socket("10.180.55.98", 11000);
-            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
-            //pw.println("login&"+zhanghao+"&"+mima);
-            //pw.println("login&3170101649&123456");
-            pw.println("query&"+ename);
-            //pw.println("change&Clearlove&7");
-            System.out.println("向服务器发送：" + ename);
-            pw.flush();
-            while (true) {
-                String a = br.readLine();
-                System.out.println(a);
-                if (a.split("&")[0].equals("OK")) {
-                    System.out.println("验证通过");
-                    shujucunchuqi1.i = Integer.valueOf(a.split("&")[1]);
-                    System.out.println(shujucunchuqi1.i);
-                }
+            Socket updateSocket = new Socket("192.168.0.103",8888);
+            DataInputStream in = new DataInputStream(updateSocket.getInputStream());
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            String JsonStr = null;
+            byte[] by = new byte[2048];
+            int n;
+            while ((n = in.read(by)) != -1)
+            {
+                baos.write(by, 0, n);
             }
+            JsonStr = new String(baos.toByteArray(),"GB2312");
+            JSONObject polListJsonObj = new JSONObject(JsonStr);
+            JSONArray polArray = polListJsonObj.getJSONArray("res");
+            JSONObject jsonObj = polArray.getJSONObject(1);
+
+            updateSocket.close();
+            System.out.println(polArray);
+//            socket = new Socket("10.180.55.98", 11000);
+//            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//            pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
+//            pw.println("query&"+ename);
+//            System.out.println("向服务器发送：" + ename);
+//            pw.flush();
+//            while (true) {
+//                String a = br.readLine();
+//                System.out.println(a);
+//                if (a.split("&")[0].equals("OK")) {
+//                    System.out.println("验证通过");
+//                    shujucunchuqi1.i = Integer.valueOf(a.split("&")[1]);
+//                    System.out.println(shujucunchuqi1.i);
+//                }
+//            }
 
         } catch (IOException e) {
             e.printStackTrace();

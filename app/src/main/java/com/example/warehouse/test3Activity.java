@@ -9,6 +9,8 @@ public class test3Activity extends AppCompatActivity {
 
     private TextView tname;
     private TextView tnum;
+    private TextView tin;
+    private TextView tout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +24,13 @@ public class test3Activity extends AppCompatActivity {
         tnum = findViewById(R.id.textView40);
         String enumber=getIntent().getStringExtra("ENUMBER");
         tnum.setText(enumber);
+
+        tin = findViewById(R.id.textView42);
+        String ein = getIntent().getStringExtra("EIN");
+        tin.setText(ein);
+
+        tout = findViewById(R.id.textView41);
+        String eout = getIntent().getStringExtra("EOUT");
+        tout.setText(eout);
     }
 }
